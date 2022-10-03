@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.h                                      :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 09:56:10 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 11:31:38 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/03 12:13:36 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/03 13:29:55 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRONMENT_H
-# define ENVIRONMENT_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
- 
-char **env_copy(char **env);
-char	*ft_getenv(char **env2, char *var);
+//Prints the path of the actual working directory
+void	ft_pwd(void);
+
+//Changes current working directoy, updating PWD and OLDPWD
+void	ft_chdir(char *dir, char **env);
 
 #endif

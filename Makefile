@@ -11,6 +11,7 @@ SOURCES				=	$(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/utils.c \
 						$(SRC_DIR)/utils2.c \
 						$(SRC_DIR)/environment.c \
+						$(SRC_DIR)/builtin1.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 

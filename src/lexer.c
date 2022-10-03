@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 11:26:11 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:52:22 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "fill_tokens.h"
 #include "utils.h"
 #include "utils2.h"
+#include "builtins.h"
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -111,14 +112,12 @@ int	main(int argc, char *argv[], char **envp)
 		add_history(str);
 		if (!str)
 			continue ;
-		
 		free(aux);
 		aux = expansor(str);
 		x = count_tokens(aux);
 		tokens = fill_tokens(aux, x);
 		if (!x)
 			continue ;
-		
 		free(aux);
 		x = 0;
 		while (tokens[x])
@@ -129,6 +128,10 @@ int	main(int argc, char *argv[], char **envp)
 			free(i);
 			x++;
 		}
+		/* ft_pwd();
+		printf("%s\n", getcwd(aux, 100));
+		ft_chdir("~", env2);
+		printf("%s\n", getcwd(aux, 100)); */
 	}
 	/* x = 0;
         while(tokens[x])
