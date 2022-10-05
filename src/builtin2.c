@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin1.c                                         :+:      :+:    :+:   */
+/*   builtin2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/05 10:36:41 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/05 10:32:11 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_env(char **env)
-{
-	while (*env)
-		printf("%s\n", *env++);
-}
-
-void	ft_pwd(void)
-{
-	char	*pwd;
-
-	pwd = NULL;
-	pwd = getcwd(pwd, 0);
-	printf("%s\n", pwd);
-	free (pwd);
-}
-
-static char	**ft_add_var(char *var, char *value, char **env)
+static char	**ft_rm_var(char *var, char **env)
 {
 	char	**new_env;
 	int		i;
+	int		j;
 	int		len;
 
 	len = 0;
 	while (env[len])
 		len++;
-	new_env = (char **)ft_calloc(len + 2, sizeof(char *));
+	new_env = (char **)ft_calloc(len, sizeof(char *));
 	i = 0;
-	while (i < len)
+	j = 0;
+	while (i < (len - 1))
 	{
-		new_env[i] = ft_strdup(env[i]);
+		if (ft_strnstr(env[j], var, ft_strlen(var)))
+			j++;
+		new_env[i] = ft_strdup(env[j]);
 		i++;
+		j++;
 	}
-	new_env[i++] = ft_strjoin(var, value);
 	new_env[i] = 0;
 	return (new_env);
 }
 
-void	ft_export(char *var, char *value, char ***env)
+void	ft_unset(char *var, char ***env)
 {
 	int		i;
 	int		coin;
@@ -68,29 +56,13 @@ void	ft_export(char *var, char *value, char ***env)
 	while (env2[i])
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
-		{
-			free (env2[i]);
-			env2[i] = ft_strjoin(var, value);
 			coin++;
-		}
 		i++;
 	}
-	if (coin == 0)
+	if (coin != 0)
 	{
-		aux = ft_add_var(var, value, env2);
+		aux = ft_rm_var(var, env2);
 		free_d_array(env2);
 		*env = aux;
 	}
-}
-
-void	ft_chdir(char *dir, char **env)
-{
-	char	*pwd;
-
-	pwd = NULL;
-	if (ft_strlen(dir) == 1 && ft_strncmp(dir, "~", 1) == 0)
-		dir = ft_getenv(env, "HOME");
-	ft_export("OLDPWD=", getcwd(pwd, 0), &env);
-	chdir(dir);
-	ft_export("PWD=", getcwd(pwd, 0), &env);
 }

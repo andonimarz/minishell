@@ -5,13 +5,14 @@ INC_DIR				= 	./includes/
 CC 					= 	gcc
 CFLAGS 				= 	-Wall -Werror -Wextra -g   #-fsanitize=address
 SRC_DIR				=	src
-SOURCES				=	$(SRC_DIR)/lexer.c \
-						$(SRC_DIR)/fill_tokens.c \
-						$(SRC_DIR)/expansor.c \
-						$(SRC_DIR)/utils.c \
-						$(SRC_DIR)/utils2.c \
-						$(SRC_DIR)/environment.c \
-						$(SRC_DIR)/builtin1.c \
+SOURCES				=	$(SRC_DIR)/lexer.c			\
+						$(SRC_DIR)/fill_tokens.c	\
+						$(SRC_DIR)/expansor.c		\
+						$(SRC_DIR)/utils.c			\
+						$(SRC_DIR)/utils2.c			\
+						$(SRC_DIR)/environment.c	\
+						$(SRC_DIR)/builtin1.c		\
+						$(SRC_DIR)/builtin2.c
 
 OBJS				= 	$(SOURCES:.c=.o)
 

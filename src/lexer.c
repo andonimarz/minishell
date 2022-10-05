@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/04 11:58:23 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/05 10:37:09 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,12 @@ int	main(int argc, char *argv[], char **envp)
 			x++;
 		}
 		//ft_pwd();
-		ft_chdir("~", env2);
+		ft_export("olajijixd=", "probando", &env2);
+		//ft_chdir("..", env2);
 		//ft_pwd();
+		//ft_env(env2);
+		ft_unset("TERMdrhd=", &env2);
+		ft_env(env2);
 	}
 	/*x = 0;
 	while (tokens[x])
