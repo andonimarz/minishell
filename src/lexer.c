@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 10:37:09 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:40:21 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char *argv[], char **envp)
 	int		x;
 	char	*aux;
 	char	**tokens;
-	char	*i;
+	//char	*i;
 	char	**env2;
 
 	argc = 0;
@@ -120,21 +120,22 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		free(aux);
 		x = 0;
-		while (tokens[x])
+		/* while (tokens[x])
 		{
 			printf("el token es %s\n", tokens[x]);
 			i = erase_quotes(tokens[x]);
 			printf("el array es %s\n", i);
 			free(i);
 			x++;
-		}
+		} */
 		//ft_pwd();
-		ft_export("olajijixd=", "probando", &env2);
+		//ft_export("olajijixd=", "probando", &env2);
 		//ft_chdir("..", env2);
 		//ft_pwd();
 		//ft_env(env2);
-		ft_unset("TERMdrhd=", &env2);
-		ft_env(env2);
+		//ft_unset("TERMdrhd=", &env2);
+		//ft_env(env2);
+		//ft_echo(tokens);
 	}
 	/*x = 0;
 	while (tokens[x])
