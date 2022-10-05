@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/05 12:38:36 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:52:33 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void	ft_echo(char **cmd)
 	if (flag == 1)
 		i = 1;
 	while (cmd[i])
+	{
 		ft_putstr_fd(cmd[i++], 1);
+		if (cmd[i])
+			write(1, " ", 1);
+	}
 	if (flag == 0)
 		write(1, "\n", 1);
 }
