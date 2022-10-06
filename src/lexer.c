@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 12:54:33 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/06 10:33:46 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "utils.h"
 #include "utils2.h"
 #include "builtins.h"
+#include "signals.h"
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -136,6 +137,7 @@ int	main(int argc, char *argv[], char **envp)
 		//ft_unset("TERMdrhd=", &env2);
 		//ft_env(env2);
 		//ft_echo(tokens);
+		ft_signals();
 	}
 	/*x = 0;
 	while (tokens[x])

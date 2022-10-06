@@ -12,15 +12,17 @@ SOURCES				=	$(SRC_DIR)/lexer.c			\
 						$(SRC_DIR)/utils2.c			\
 						$(SRC_DIR)/environment.c	\
 						$(SRC_DIR)/builtin1.c		\
-						$(SRC_DIR)/builtin2.c
+						$(SRC_DIR)/builtin2.c		\
+						$(SRC_DIR)/signals.c
 
 OBJS				= 	$(SOURCES:.c=.o)
-
+READLINE_PATH	= ~/.brew/opt/readline
+READLINE		= -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib
 
 $(NAME): $(OBJS)
 #	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
 	make -C $(libft)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline $(libft)/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(libft)/libft.a -o $(NAME) $(READLINE)
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
