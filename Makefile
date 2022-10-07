@@ -3,7 +3,7 @@ NAME				=	minishell
 libft				= 	libft
 INC_DIR				= 	./includes/
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g   #-fsanitize=address
+CFLAGS 				= 	-Wall -Werror -Wextra #-g   #-fsanitize=address
 SRC_DIR				=	src
 SOURCES				=	$(SRC_DIR)/lexer.c			\
 						$(SRC_DIR)/fill_tokens.c	\
@@ -16,13 +16,12 @@ SOURCES				=	$(SRC_DIR)/lexer.c			\
 						$(SRC_DIR)/signals.c
 
 OBJS				= 	$(SOURCES:.c=.o)
-READLINE_PATH	= ~/.brew/opt/readline
-READLINE		= -I$(READLINE_PATH)/include -lreadline -L $(READLINE_PATH)/lib
+RLINE		= -lreadline -L${HOME}/.brew/opt/readline/lib
 
 $(NAME): $(OBJS)
 #	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
 	make -C $(libft)
-	$(CC) $(CFLAGS) $(OBJS) $(libft)/libft.a -o $(NAME) $(READLINE)
+	$(CC) $(CFLAGS) $(OBJS)  $(RLINE) $(libft)/libft.a -o $(NAME) 
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)

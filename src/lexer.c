@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 10:33:46 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:22:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,15 @@ int	main(int argc, char *argv[], char **envp)
 	env2 = env_copy(envp);
 	while (1)
 	{
+		ft_signals();
 		aux = ft_strjoin(getenv("USER"), "@minishell $ ");
 		str = readline(aux);
+		if (str == NULL)
+		{
+			printf("CTRL + D = rl es igual a NULL... ojo! está en el bucle principal\n");
+			printf ("función para salir haciendo frees etc. besitos xd\n");
+			exit(0);
+		}
 		add_history(str);
 		if (!str)
 			continue ;
@@ -137,7 +144,6 @@ int	main(int argc, char *argv[], char **envp)
 		//ft_unset("TERMdrhd=", &env2);
 		//ft_env(env2);
 		//ft_echo(tokens);
-		ft_signals();
 	}
 	/*x = 0;
 	while (tokens[x])
