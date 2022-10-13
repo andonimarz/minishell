@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 12:22:08 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:08:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,9 @@ int	main(int argc, char *argv[], char **envp)
 		str = readline(aux);
 		if (str == NULL)
 		{
-			printf("CTRL + D = rl es igual a NULL... ojo! está en el bucle principal\n");
-			printf ("función para salir haciendo frees etc. besitos xd\n");
+			printf("exit\n");
+			printf("/////CTRL + D = está en el bucle principal\n");
+			printf ("/////función para salir haciendo frees etc. besitos xd\n");
 			exit(0);
 		}
 		add_history(str);
