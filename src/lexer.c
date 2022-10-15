@@ -6,23 +6,29 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 17:08:08 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:27:28 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "environment.h"
 #include "expansor.h"
+#include "fill_data.h"
 #include "fill_tokens.h"
+#include "redirections.h"
 #include "utils.h"
 #include "utils2.h"
-#include "builtins.h"
-#include "signals.h"
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "get_cmd_path.h"
+#include "double_red.h"
+#include "general_function.h"
+#include "fd_stuff.h"
+#include "executor.h"
+#include "signals.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -39,6 +45,18 @@ int	count_char_index(char *str, char a)
 	}
 	return (-1);
 }
+
+int	count_index2(char *str)
+{
+	 
+	if (!second_char_exists(str, *str))
+	{
+		printf("error\n");
+		exit(0);
+	}
+	return (count_char_index(str, *str) );
+}
+
 int	count_word_index(char *str)
 {
 	int	x;
@@ -50,12 +68,7 @@ int	count_word_index(char *str)
 	{
 		if ((*str == '"' || *str == '\''))
 		{
-			if (!second_char_exists(str, *str))
-			{
-				printf("error\n");
-				return (-1);
-			}
-			i = count_char_index(str, *str);
+			i = count_index2(str);
 			x += i + 1;
 			str += i + 1;
 		}
@@ -97,19 +110,22 @@ int	count_tokens(char *str)
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*str;
-	int		x;
 	char	*aux;
 	char	**tokens;
-	//char	*i;
 	char	**env2;
+	t_data	*data;
+ 
 
+	tokens = NULL;
+	if(!argc || !argv)
+		exit(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
 	while (1)
 	{
 		ft_signals();
-		aux = ft_strjoin(getenv("USER"), "@minishell $ ");
+		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
 		str = readline(aux);
 		if (str == NULL)
 		{
@@ -118,41 +134,26 @@ int	main(int argc, char *argv[], char **envp)
 			printf ("/////función para salir haciendo frees etc. besitos xd\n");
 			exit(0);
 		}
-		add_history(str);
-		if (!str)
-			continue ;
-		free(aux);
-		aux = expansor(str);
-		x = count_tokens(aux);
-		tokens = fill_tokens(aux, x);
-		if (!x)
-			continue ;
-		free(aux);
-		x = 0;
-		/* while (tokens[x])
+		if (*str != '\0')
 		{
-			printf("el token es %s\n", tokens[x]);
-			i = erase_quotes(tokens[x]);
-			printf("el array es %s\n", i);
-			free(i);
-			x++;
-		} */
-		//ft_pwd();
-		//ft_export("olajijixd=", "probando", &env2);
-		//ft_chdir("..", env2);
-		//ft_pwd();
-		//ft_env(env2);
-		//ft_unset("TERMdrhd=", &env2);
-		//ft_env(env2);
-		//ft_echo(tokens);
+			add_history(str);
+			free(aux);	 
+			general_function(str, &data, env2);		  
+			ft_exec(data, env2);
+			ft_lstclear1(&data);
+			//ft_pwd();
+			//ft_export("olajijixd=", "probando", &env2);
+			//ft_chdir("..", env2);
+			//ft_pwd();
+			//ft_env(env2);
+			//ft_unset("TERMdrhd=", &env2);
+			//ft_env(env2);
+			//ft_echo(tokens);
+			if (tokens)
+				free_d_array(tokens);
+		}
 	}
-	/*x = 0;
-	while (tokens[x])
-	{
-		printf("token %d es: %s\n",x, tokens[x]);
-		x++;
-	} */
-	free_d_array(tokens);
-	//free(str);
+	//double_redirection("hola");
+	free_d_array(env2);
 	return (0);
 }

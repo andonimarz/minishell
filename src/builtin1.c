@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/05 12:52:33 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:08:31 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	ft_echo(char **cmd)
 void	ft_env(char **env)
 {
 	while (*env)
-		printf("%s\n", *env++);
+	{
+		ft_putendl_fd(*env, 1);
+		env++;
+	}
 }
 
 void	ft_pwd(void)

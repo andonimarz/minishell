@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/05 11:14:28 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:34:21 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ static char	**ft_add_var(char *var, char *value, char **env)
 	new_env[i] = 0;
 	return (new_env);
 }
+
+/* char	*ft_get_var(char *var)
+{
+	char	*aux;
+	int		len;
+
+	
+} */
 
 void	ft_export(char *var, char *value, char ***env)
 {

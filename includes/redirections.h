@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 15:35:45 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 15:37:53 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/07 10:35:14 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/07 10:42:36 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef REDIRECTIONS_H
+# define REDIRECTIONS_H
+#include "utils.h"
 
-#ifndef UTILS_H
-# define UTILS_H
+t_data	*redirection(char **tokens);
 
-typedef struct s_data
-{
-	char	**cmd;
-	char	**redirection;
-	char	*path;
-	int		input;
-	int		output;
-	struct s_data	*next;
-
-}			t_data;
-
-void		free_d_array(char **array);
-char		*find_path(char **envp);
-char		*check_if_command(char **envp, char *str);
-int			file_exists(char *str);
-int			second_char_exists(char *str, char a);
 #endif
