@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/15 10:27:28 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:45:47 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include "fd_stuff.h"
 #include "executor.h"
 #include "signals.h"
+#include "builtins.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -139,8 +140,9 @@ int	main(int argc, char *argv[], char **envp)
 			add_history(str);
 			free(aux);	 
 			general_function(str, &data, env2);		  
-			ft_exec(data, env2);
+			ft_exec(data, &env2);
 			ft_lstclear1(&data);
+			//printf("%s\n", ft_subst_var("Hola=gdhdfh"));
 			//ft_pwd();
 			//ft_export("olajijixd=", "probando", &env2);
 			//ft_chdir("..", env2);

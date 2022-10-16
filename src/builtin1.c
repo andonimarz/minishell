@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/15 15:08:31 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:36:28 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	ft_pwd(void)
 	printf("%s\n", getcwd(NULL, 0));
 }
 
-void	ft_chdir(char *dir, char **env)
+void	ft_chdir(char *dir, char ***env)
 {
 	if (ft_strlen(dir) == 1 && ft_strncmp(dir, "~", 1) == 0)
-		dir = ft_getenv(env, "HOME");
-	ft_export("OLDPWD=", getcwd(NULL, 0), &env);
+		dir = ft_getenv(*env, "HOME");
+	ft_export("OLDPWD=", getcwd(NULL, 0), env);
 	chdir(dir);
-	ft_export("PWD=", getcwd(NULL, 0), &env);
+	ft_export("PWD=", getcwd(NULL, 0), env);
 }

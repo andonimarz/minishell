@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/15 16:34:21 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:01:04 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	ft_unset(char *var, char ***env)
 	while (env2[i])
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
-			coin++;
+			if (env2[i][ft_strlen(var)] == '=')
+				coin++;
 		i++;
 	}
 	if (coin != 0)
@@ -79,18 +80,10 @@ static char	**ft_add_var(char *var, char *value, char **env)
 		new_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new_env[i++] = ft_strjoin(var, value);
-	new_env[i] = 0;
+	new_env[i] = ft_strjoin(var, value);
+	new_env[++i] = 0;
 	return (new_env);
 }
-
-/* char	*ft_get_var(char *var)
-{
-	char	*aux;
-	int		len;
-
-	
-} */
 
 void	ft_export(char *var, char *value, char ***env)
 {
@@ -100,9 +93,9 @@ void	ft_export(char *var, char *value, char ***env)
 	int		i;
 
 	env2 = *env;
-	i = 0;
+	i = -1;
 	coin = 0;
-	while (env2[i])
+	while (env2[++i])
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
 		{
@@ -110,12 +103,23 @@ void	ft_export(char *var, char *value, char ***env)
 			env2[i] = ft_strjoin(var, value);
 			coin++;
 		}
-		i++;
 	}
-	if (coin == 0)
-	{
+	if (var && coin == 0)
+	{	
 		aux = ft_add_var(var, value, env2);
 		free_d_array(env2);
 		*env = aux;
 	}
+}
+
+char	*ft_subst_var(char *var)
+{
+	size_t		len;
+
+	len = 0;
+	while (var[len] && var[len] != '=')
+		len++;
+	if (len < ft_strlen(var))
+		return (ft_substr(var, 0, len + 1));
+	return (0);
 }
