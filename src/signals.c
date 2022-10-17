@@ -12,6 +12,7 @@
 
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
 #include <signals.h>
 #include <stdlib.h>
 #include <stdio.h>
