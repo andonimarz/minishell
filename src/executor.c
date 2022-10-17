@@ -6,11 +6,12 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/16 16:50:00 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:48:52 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "executor.h"
 #include "fd_stuff.h"
 #include "utils.h"
 #include <sys/wait.h>
@@ -60,36 +61,17 @@ static void	ft_dups(char **redir, t_fd *fd)
 //Makes the required dups and executes the command
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
 {
-	int fd1[2];
-	pid_t pid;
 	ft_dup_work(fd);
-	if(fd->here_doc == 1)
-	{
-		 
-		pipe(fd1);
-		pid = fork();
-		if(pid == 0)
-		{	close(fd1[0]);
-			dup2(fd1[1], STDOUT_FILENO);
-			close(fd1[1]);
-			double_redirection(fd->key);
-		}
-		else if(pid>0)
-		{
-			 
-			close(fd1[1]);
-			dup2(fd1[0], STDIN_FILENO);
-			close(fd1[0]);
-		}
-	}
-	
-	if (execve(node->path, node->cmd, envp) == -1)
+	if (ft_is_builtin(node->cmd[0]))
+		ft_call_builtin(node->cmd, &envp);
+	else if (execve(node->path, node->cmd, envp) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(node->cmd[0], 2);
 		ft_putendl_fd("bash: command not found", 2);
 		exit(0);
 	}
+	exit(0); //FT_EXIT WORK IN PROGRESS
 }
 
 //Creates a pipe and makes a fork.
@@ -124,91 +106,6 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
 	}
 }
 
-//Returns the number of nodes of a linked list
-static int	ft_count_nodes(t_data *node)
-{
-	int		node_nb;
-
-	node_nb = 1;
-	while (node->next)
-	{
-		node_nb++;
-		node = node->next;
-	}
-	return (node_nb);
-}
-
-//Checks if given command is ft_builtin
-//Returns	1 if cmd is "pwd", "echo" or "env"
-//and		2 if cmd is "export", "unset" or "chdir"
-int	ft_is_builtin(char *cmd)
-{
-	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		return (1);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		return (2);
-	return (0);
-}
-
-int	ft_check_var(char *var, char *cmd)
-{
-	int	len;
-	int	i;
-
-	len = ft_strlen(var);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		len--;
-	i = 0;
-	while (var[i] && i < len)
-	{
-		if (!ft_isalnum(var[i]))
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": `", 2);
-			ft_putstr_fd(var, 2);
-			ft_putendl_fd("': not a valid identifier", 2);
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-void	ft_call_builtin(char **cmd, char ***envp)
-{
-	char	*var;
-
-	var = NULL;
-	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
-	{
-		var = ft_subst_var(cmd[1]);
-		if (var)
-			if (ft_check_var(var, cmd[0]))
-				ft_export(var, (ft_strchr(cmd[1], '=') + 1), envp);
-	}
-	if (ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0)
-	{
-		if (ft_check_var(cmd[1], cmd[0]))
-			ft_unset(cmd[1], envp);
-	}
-	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
-		ft_chdir(cmd[1], envp);
-	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)	//QUITAR MAS ADELANTE. Se tienen que hacer en el loop
-		ft_env(*envp);
-	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)	//QUITAR MAS ADELANTE
-		ft_pwd();
-	if (var)
-		free(var);
-}
-
-//Creates a t_fd structure and calls ft_pipex for every command
-// except for the last or if there is only one.
-//Closes all used fd and restores original STDIN and STDOUT
 void	ft_exec(t_data *node, char ***envp)
 {
 	int		node_nb;
@@ -217,7 +114,7 @@ void	ft_exec(t_data *node, char ***envp)
 
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
-	if (node_nb == 1 && ft_is_builtin(node->cmd[0])/* == 2*/)
+	if (node_nb == 1 && ft_is_builtin(node->cmd[0]) == 2)
 		ft_call_builtin(node->cmd, envp);
 	else
 	{

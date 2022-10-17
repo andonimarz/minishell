@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/16 15:01:04 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:15:38 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,3 @@ void	ft_export(char *var, char *value, char ***env)
 	}
 }
 
-char	*ft_subst_var(char *var)
-{
-	size_t		len;
-
-	len = 0;
-	while (var[len] && var[len] != '=')
-		len++;
-	if (len < ft_strlen(var))
-		return (ft_substr(var, 0, len + 1));
-	return (0);
-}
