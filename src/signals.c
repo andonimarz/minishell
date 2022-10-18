@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/13 17:07:19 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:54:44 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ void	ft_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+//SIGINT = CTR + C
+//SIGQUIT = CTR + Ç
 void	signal_handler_in_cat(int num)
 {
-	if (num == SIGINT) //CTR + C
+	if (num == SIGINT)
 	{
 		printf("\n");
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
-	if (num == SIGQUIT) //CTR + Ç
+	if (num == SIGQUIT)
 	{
 		rl_replace_line("", 1);
 		rl_redisplay();
@@ -57,6 +59,18 @@ void	ft_signals_in_cat(void)
 {
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
+}
+
+void	ft_check_rl(char *str, t_data **data)
+{
+	if (str == NULL)
+	{
+		printf("exit\n");
+		printf("/////CTRL + D = está en el bucle principal\n");
+		printf ("/////------>ft_exit <------\n");
+		(void) data; //ft_exit en condiciones
+		exit(0);
+	}
 }
 
 //	Ejemplo usando rl

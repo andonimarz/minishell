@@ -3,21 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   fd_stuff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/12 17:42:12 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:14:34 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "double_red.h"
 #include "fd_stuff.h"
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void	ft_close(int fd)
 {
 	if (fd != -1)
 		close(fd);
+}
+void	here_doc(char *key, t_fd *fd)
+{
+	int		fd1[2];
+	pid_t	pid;
+	char	*str;
+
+	pipe(fd1);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(fd1[0]);
+		str = double_redirection(key);
+		write(fd1[1], str, ft_strlen(str));
+		write(fd1[1], "\n", 1);
+		close(fd1[1]);
+		exit(0);
+	}
+	else
+	{
+		close(fd1[1]);
+		wait(NULL);
+		fd->fdin = dup(fd1[0]);
+		close(fd1[0]);
+	}
 }
 
 void	ft_get_fd(char *file, int mode, t_fd *fd)
@@ -45,9 +73,10 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 	}
 	else if (mode == 3)
 	{
-		fd->here_doc = 1;
-		fd->key = file;
-
+		if (!file)
+			printf("Aquí iria un error\n");
+		else
+			here_doc(file, fd);
 	}
 }
 

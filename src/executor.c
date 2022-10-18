@@ -6,19 +6,19 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/17 17:48:52 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:30:17 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "executor.h"
+#include "double_red.h"
 #include "fd_stuff.h"
 #include "utils.h"
+#include "executor.h"
+#include "builtins.h"
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include "double_red.h"
-#include "builtins.h"
 
 //Makes required redirections before executing the command
 static void	ft_dup_work(t_fd *fd)

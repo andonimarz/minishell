@@ -12,8 +12,8 @@
 
 #include "../libft/libft.h"
 #include <readline/readline.h>
-#include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 char	*add_line_break(char *aux, char *str)
 {
@@ -28,7 +28,7 @@ char	*add_line_break(char *aux, char *str)
 	return (aux);
 }
 
-void double_redirection(char *key)
+char	*double_redirection(char *key)
 {
 	char	*aux;
 	char	*str;
@@ -36,7 +36,7 @@ void double_redirection(char *key)
 	aux = 0;
 	while (1)
 	{
-		str = readline("> ");
+		str = readline("heredoc> ");
 		if (!ft_strncmp(str, key, __INT_MAX__))
 			break ;
 		if (!aux)
@@ -46,8 +46,5 @@ void double_redirection(char *key)
 		free(str);
 	}
 	free(str);
-	write(1,aux, ft_strlen(aux));
-	write(1, "\n",1);
-	 free(aux);
-	  exit(0);
+	return (aux);
 }

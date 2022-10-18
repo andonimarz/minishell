@@ -1,0 +1,8 @@
+*.out
+*.o
+*.log
+.DS_Store
+minishell
+.vscode
+*.plist
+libft.a
