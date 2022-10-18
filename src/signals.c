@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/18 13:54:44 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:18:09 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	signal_handler(int num)
 	(void)num;
 	if (rl_on_new_line() == -1)
 		exit(-1);
-	printf("\n");
+	write(1, "\n", 1);
 	rl_replace_line("", 1);
 	rl_redisplay();
 }
@@ -41,17 +41,16 @@ void	signal_handler_in_cat(int num)
 {
 	if (num == SIGINT)
 	{
-		printf("\n");
+		if (rl_on_new_line() == -1)
+			exit(-1);
+		write(1, "\n", 1);
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
 	if (num == SIGQUIT)
 	{
-		rl_replace_line("", 1);
-		rl_redisplay();
 		printf("^\\Quit: 3\n");
 		printf ("ft_exit con frees etc\n");
-		exit(0);
 	}
 }
 
@@ -66,10 +65,10 @@ void	ft_check_rl(char *str, t_data **data)
 	if (str == NULL)
 	{
 		printf("exit\n");
-		printf("/////CTRL + D = está en el bucle principal\n");
+		printf("/////CTRL + D\n");
 		printf ("/////------>ft_exit <------\n");
-		(void) data; //ft_exit en condiciones
-		exit(0);
+		(void) data;
+		exit(-1);
 	}
 }
 

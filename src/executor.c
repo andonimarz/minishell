@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/18 13:30:17 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:05:21 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(node->cmd[0], 2);
 		ft_putendl_fd("bash: command not found", 2);
-		exit(0);
 	}
 	exit(0); //FT_EXIT WORK IN PROGRESS
 }

@@ -60,12 +60,12 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	}
 	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
 		ft_chdir(cmd[1], envp);
-	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)	//QUITAR MAS ADELANTE. Se tienen que hacer en el loop
+	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
 		ft_env(*envp);
-	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)	//QUITAR MAS ADELANTE
+	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)
 		ft_pwd();
-	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0) //QUITAR MAS ADELANTE
-		ft_chdir(cmd[1], envp);
+	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)
+		ft_echo(&cmd[1]);
 	if (var)
 		free(var);
 }
