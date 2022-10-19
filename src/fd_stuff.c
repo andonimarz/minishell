@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_stuff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/18 10:14:34 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:43:28 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+#include "signals.h"
 
 void	ft_close(int fd)
 {
@@ -76,7 +78,11 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		if (!file)
 			printf("Aquí iria un error\n");
 		else
+		{
+			signal(SIGINT, SIG_IGN);
 			here_doc(file, fd);
+			ft_signals();
+		}
 	}
 }
 

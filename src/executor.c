@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/18 17:05:21 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:22:26 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 //Makes required redirections before executing the command
 static void	ft_dup_work(t_fd *fd)
@@ -113,8 +114,13 @@ void	ft_exec(t_data *node, char ***envp)
 
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
+	signal(SIGINT, SIG_IGN);
 	if (node_nb == 1 && ft_is_builtin(node->cmd[0]) == 2)
+	{
+		ft_dups(node->redirection, &fd);
+		ft_dup_work(&fd);
 		ft_call_builtin(node->cmd, envp);
+	}
 	else
 	{
 		pid = fork();
