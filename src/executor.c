@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/19 17:22:26 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:24:30 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,17 @@ static void	ft_dups(char **redir, t_fd *fd)
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
 {
 	ft_dup_work(fd);
-	if (ft_is_builtin(node->cmd[0]))
-		ft_call_builtin(node->cmd, &envp);
-	else if (execve(node->path, node->cmd, envp) == -1)
+	if (node->cmd)
 	{
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(node->cmd[0], 2);
-		ft_putendl_fd("bash: command not found", 2);
+		printf("CMD %s", node->cmd[0]);
+		if (ft_is_builtin(node->cmd))
+			ft_call_builtin(node->cmd, &envp);
+		else if (execve(node->path, node->cmd, envp) == -1)
+		{
+			ft_putstr_fd("minibash: ", 2);
+			ft_putstr_fd(node->cmd[0], 2);
+			ft_putendl_fd(" bash: command not found", 2);
+		}
 	}
 	exit(0); //FT_EXIT WORK IN PROGRESS
 }
@@ -115,9 +119,11 @@ void	ft_exec(t_data *node, char ***envp)
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
 	signal(SIGINT, SIG_IGN);
-	if (node_nb == 1 && ft_is_builtin(node->cmd[0]) == 2)
+	if (node_nb == 1 && ft_is_builtin(node->cmd) == 2)
 	{
 		ft_dups(node->redirection, &fd);
+		ft_close(fd.fdin);
+		fd.fdin = -1;
 		ft_dup_work(&fd);
 		ft_call_builtin(node->cmd, envp);
 	}
@@ -137,10 +143,8 @@ void	ft_exec(t_data *node, char ***envp)
 			ft_child(node, *envp, &fd);
 		}
 		else
-		{
 			wait(NULL);
-			ft_close_all(&fd);
-			ft_reset_fd(&fd);
-		}
 	}
+	ft_close_all(&fd);
+	ft_reset_fd(&fd);
 }

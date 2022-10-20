@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 12:16:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:22:52 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	check_redirection(char **tokens, int x, t_data **nodes)
 		return (-1);
 	else
 		x += fill_redirection(tokens + x, *nodes);
-	ft_lstadd_back2(nodes, ft_lstnew2(NULL));
+	ft_lstadd_back2(nodes, ft_lstnew2());
 	x++;
 	return (x);
 }
@@ -92,7 +92,7 @@ t_data	*redirection(char **tokens)
 	i = -1;
 	x = 0;
 	check_pipe(tokens);
-	nodes = ft_lstnew2(NULL);
+	nodes = ft_lstnew2();
 	aux = nodes;
 	x = 0;
 	while (tokens[x])
@@ -103,7 +103,7 @@ t_data	*redirection(char **tokens)
 			break ;
 		else
 			x += i;
-		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
+		ft_lstadd_back2(&aux, ft_lstnew2());
 		x += 2;
 	}
 	return (aux);

@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:18:45 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/17 17:16:59 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:51:15 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_check_var(char *var, char *cmd);
 //Checks if given command is ft_builtin
 //Returns	1 if cmd is "pwd", "echo" or "env"
 //and		2 if cmd is "export", "unset" or "chdir"
-int		ft_is_builtin(char *cmd);
+int		ft_is_builtin(char **cmd);
 
 //Returns the number of nodes of a linked list
 int		ft_count_nodes(t_data *node);

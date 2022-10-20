@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 12:04:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:29:34 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ void	malloc_commands(char **tokens, t_data **node)
 			x += 2;
 		}
 	}
-	aux->cmd = (char **)malloc((len + 1) * sizeof(char *));
-	aux->cmd[len] = 0;
+	if(len > 0)
+	{
+		aux->cmd = (char **)ft_calloc((len + 1), sizeof(char *));
+		aux->cmd[len] = 0;
+	}
 }
 
 int	fill_commands(char **tokens, t_data *node)

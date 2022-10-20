@@ -46,7 +46,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	char	*var;
 
 	var = NULL;
-	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && cmd[1])
 	{
 		var = ft_subst_var(cmd[1]);
 		if (var)
@@ -70,16 +70,19 @@ void	ft_call_builtin(char **cmd, char ***envp)
 		free(var);
 }
 
-int	ft_is_builtin(char *cmd)
+int	ft_is_builtin(char **cmd)
 {
-	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		return (1);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0 || \
-		ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		return (2);
+	if (cmd)
+	{
+		if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 || \
+			ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 || \
+			ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
+			return (1);
+		if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 || \
+			ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0 || \
+			ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
+			return (2);
+	}
 	return (0);
 }
 
