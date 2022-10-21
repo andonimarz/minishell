@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 16:16:16 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:56:45 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ char	*ft_subst_var(char *var)
 	size_t		len;
 
 	len = 0;
-	while (var[len] && var[len] != '=')
-		len++;
-	if (len < ft_strlen(var))
-		return (ft_substr(var, 0, len + 1));
+	if (var)
+	{
+		while (var[len] && var[len] != '=')
+			len++;
+		if (len < ft_strlen(var))
+			return (ft_substr(var, 0, len + 1));
+	}
 	return (0);
 }
 
@@ -58,18 +61,10 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	char	*var;
 
 	var = NULL;
-	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && cmd[1])
-	{
-		var = ft_subst_var(cmd[1]);
-		if (var)
-			if (ft_check_var(var, cmd[0]))
-				ft_export(var, (ft_strchr(cmd[1], '=') + 1), envp);
-	}
+	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
+		ft_export(cmd, envp);
 	if (ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0)
-	{
-		if (ft_check_var(cmd[1], cmd[0]))
-			ft_unset(cmd[1], envp);
-	}
+		ft_unset(cmd, envp);
 	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
 		ft_chdir(cmd[1], envp);
 	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
@@ -78,8 +73,6 @@ void	ft_call_builtin(char **cmd, char ***envp)
 		ft_pwd();
 	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)
 		ft_echo(&cmd[1], *envp);
-	if (var)
-		free(var);
 }
 
 int	ft_is_builtin(char **cmd)

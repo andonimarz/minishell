@@ -6,13 +6,14 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/17 17:15:38 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:25:36 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtins.h"
 #include "../libft/libft.h"
 #include "../includes/utils.h"
+#include "../includes/executor.h"
 
 static char	**ft_rm_var(char *var, char **env)
 {
@@ -35,32 +36,43 @@ static char	**ft_rm_var(char *var, char **env)
 		i++;
 		j++;
 	}
-	new_env[i] = 0;
+	new_env[i] = NULL;
 	return (new_env);
 }
 
-void	ft_unset(char *var, char ***env)
+void	ft_unset(char **cmd, char ***env)
 {
 	char	**env2;
 	char	**aux;
 	int		coin;
 	int		i;
+	int		j;
 
 	env2 = *env;
 	i = 0;
 	coin = 0;
-	while (env2[i])
+	j = 0;
+	while (cmd[++j])
 	{
-		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
-			if (env2[i][ft_strlen(var)] == '=')
-				coin++;
-		i++;
-	}
-	if (coin != 0)
-	{
-		aux = ft_rm_var(var, env2);
-		free_d_array(env2);
-		*env = aux;
+		if (ft_check_var(cmd[j], cmd[0]))
+		{
+			printf("cmd = %s\n", cmd[j]);
+			while (env2[i])
+			{
+				if (cmd[j] && ft_strnstr(env2[i], cmd[j], ft_strlen(cmd[j])))
+					if (env2[i][ft_strlen(cmd[j])] == '=')
+						coin++;
+				i++;
+			}
+			printf("COIN = %d\n", coin);
+			if (coin != 0)
+			{
+				aux = ft_rm_var(cmd[j], env2);
+				free_d_array(env2);
+				*env = aux;
+				coin = 0;
+			}
+		}
 	}
 }
 
@@ -85,7 +97,7 @@ static char	**ft_add_var(char *var, char *value, char **env)
 	return (new_env);
 }
 
-void	ft_export(char *var, char *value, char ***env)
+void	ft_export_job(char *var, char *value, char ***env)
 {
 	char	**env2;
 	char	**aux;
@@ -112,3 +124,26 @@ void	ft_export(char *var, char *value, char ***env)
 	}
 }
 
+void	ft_export(char **cmd, char ***env)
+{
+	char	*var;
+	int		i;
+
+	var = NULL;
+	i = 1;
+	if (!cmd[i])
+		ft_env(*env);
+	while (cmd[i])
+	{
+		var = ft_subst_var(cmd[i]);
+		if (var)
+			if (ft_check_var(var, cmd[0]))
+				ft_export_job(var, (ft_strchr(cmd[i], '=') + 1), env);
+		if (var)
+		{
+			free(var);
+			var = NULL;
+		}
+		i++;
+	}
+}

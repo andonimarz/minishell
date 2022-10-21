@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 15:25:39 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:54:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	general_function(char *str, t_data **data, char **env2)
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
 	free_d_array(tokens);
- 
 	fill_cmd_path(*data, env2);
 }

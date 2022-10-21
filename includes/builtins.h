@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 12:13:36 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 16:04:36 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:57:19 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_chdir(char *dir, char ***env);
 //Adds/replaces variable in environment
 //Hay que meter '=' después de var porque si no puede confundir
 //variables que empiecen igual.
-void	ft_export(char *var, char *value, char ***env);
+void	ft_export(char **cmd, char ***env);
+void	ft_export_job(char *var, char *value, char ***env);
 
 //Prints the env
 void	ft_env(char **env);
@@ -31,7 +32,7 @@ void	ft_env(char **env);
 //Si no coincide no hace nada
 //Hay que meter '=' después de var porque si no puede confundir
 //variables que empiecen igual.
-void	ft_unset(char *var, char ***env);
+void	ft_unset(char **cmd, char ***env);
 
 //Prints arguments separated with a space followed by a new line
 //Flag "-n" - Do not output a trailing newline.
