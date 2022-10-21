@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/21 16:16:16 by amarzana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "../libft/libft.h"
@@ -65,7 +77,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)
 		ft_pwd();
 	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)
-		ft_echo(&cmd[1]);
+		ft_echo(&cmd[1], *envp);
 	if (var)
 		free(var);
 }

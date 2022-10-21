@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 12:13:36 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/16 12:36:55 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:04:36 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_unset(char *var, char ***env);
 
 //Prints arguments separated with a space followed by a new line
 //Flag "-n" - Do not output a trailing newline.
-void	ft_echo(char **cmd);
+void	ft_echo(char **cmd, char **env);
 
 char	*ft_subst_var(char *var);
 #endif

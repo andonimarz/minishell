@@ -30,7 +30,8 @@ OBJS				= 	$(SOURCES:.c=.o)
 $(NAME): $(OBJS)
 #	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
 	make -C $(libft)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline $(libft)/libft.a -o $(NAME)
+#	$(CC) $(CFLAGS) $(OBJS) -lreadline $(libft)/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include $(libft)/libft.a -o $(NAME)
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)

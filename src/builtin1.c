@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/18 16:54:11 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:47:14 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,56 @@
 #include "../includes/environment.h"
 #include <stdio.h>
 
-void	ft_echo(char **cmd)
+static int	ft_count_flags(char **cmd)
 {
 	int	flag;
 	int	i;
+	int	j;
 
 	flag = 0;
 	i = 0;
-	if (cmd[0][0] == '-')
+	j = 0;
+	while (cmd[j])
 	{
-		flag = 1;
-		while (cmd[0][++i])
-			if (cmd[0][i] != 'n')
-				flag = 0;
+		if (cmd[j][0] == '-')
+		{
+			flag++;
+			i = 0;
+			while (cmd[j][++i])
+			{
+				if (cmd[j][i] != 'n')
+				{
+					flag--;
+					return (flag);
+				}
+			}
+		}
+		j++;
 	}
+	return (flag);
+}
+
+void	ft_echo(char **cmd, char **env)
+{
+	int		flag;
+	int		i;
+
+	flag = 0;
 	i = 0;
-	if (flag == 1)
-		i = 1;
-	while (cmd[i])
+	if (cmd[0])
 	{
-		ft_putstr_fd(cmd[i++], 1);
-		if (cmd[i])
-			write(1, " ", 1);
+		flag = ft_count_flags(cmd);
+		i = flag;
+		while (cmd[i])
+		{
+			if (ft_strncmp(cmd[i], "~", ft_strlen(cmd[i])) == 0)
+				ft_putstr_fd(ft_getenv(env, "HOME"), 1);
+			else
+				ft_putstr_fd(cmd[i], 1);
+			if (cmd[i + 1])
+				write(1, " ", 1);
+			i++;
+		}
 	}
 	if (flag == 0)
 		write(1, "\n", 1);

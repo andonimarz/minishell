@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/19 17:10:14 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:27:55 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+
+void	rl_replace_line (const char *text, int clear_undo);
 
 void	signal_handler(int num)
 {
