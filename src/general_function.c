@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:54:08 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:00:36 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,9 @@ void	general_function(char *str, t_data **data, char **env2)
 {
 	char	*aux;
 	char	**tokens;
-	int		x;
 
-	x = 0;
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
-	/* while (tokens[x])
-	{
-		printf("%s\n", tokens[x]);
-		x++;
-	} */
 	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);

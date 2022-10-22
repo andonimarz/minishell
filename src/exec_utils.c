@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 17:56:45 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:55:15 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ int	ft_check_var(char *var, char *cmd)
 
 void	ft_call_builtin(char **cmd, char ***envp)
 {
-	char	*var;
+	int	i;
 
-	var = NULL;
+	i = 0;
 	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
 		ft_export(cmd, envp);
 	if (ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0)
-		ft_unset(cmd, envp);
+		while (cmd[++i])
+			if (ft_check_var(cmd[i], cmd[0]))
+				ft_unset(cmd[i], envp);
 	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
 		ft_chdir(cmd[1], envp);
 	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
@@ -77,7 +79,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 
 int	ft_is_builtin(char **cmd)
 {
-	if (cmd)
+	if (cmd[0])
 	{
 		if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 || \
 			ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 || \

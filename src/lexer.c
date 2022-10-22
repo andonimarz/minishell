@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 13:50:13 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:13:07 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "environment.h"
 #include "executor.h"
 #include "expansor.h"
-#include "fd_stuff.h"
+#include "fd_utils.h"
 #include "fill_data.h"
 #include "fill_tokens.h"
 #include "general_function.h"

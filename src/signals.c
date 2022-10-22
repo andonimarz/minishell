@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 14:27:55 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:03:30 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-void	rl_replace_line (const char *text, int clear_undo);
+void	rl_replace_line(const char *text, int clear_undo);
 
 void	signal_handler(int num)
 {
@@ -37,8 +37,6 @@ void	ft_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-//SIGINT = CTR + C
-//SIGQUIT = CTR + Ç
 void	signal_handler_in_cat(int num)
 {
 	if (num == SIGINT)
@@ -66,38 +64,8 @@ void	ft_check_rl(char *str, t_data **data)
 	if (str == NULL)
 	{
 		printf("exit\n");
-		printf("/////CTRL + D\n");
 		printf ("/////------>ft_exit <------\n");
 		(void) data;
 		exit(-1);
 	}
 }
-
-//	Ejemplo usando rl
-/* 	if (SIGINT == num)
-	{
-		printf("\n");
-		rl_replace_line("", 1);
-		rl_redisplay();
-	}
-*/
-
-//
-//rl_on_new_line
-//Tell the update functions that we have moved onto a new 
-//(empty) line, usually after outputting a newline. 
-//With ctr-d it returns -1
-
-//rl_replace_line
-//Replace the contents of rl_line_buffer with text. The point 
-//and mark are preserved, if possible. If clear_undo is non-zero,
-//the undo list associated with the current line is cleared.
-
-//rl_redisplay
-//Change what’s displayed on the screen to reflect the current 
-//contents of rl_line_buffer. 
-
-//using sig_ign like signal(SIGINT, SIG_IGN); will cause the 
-//program to ignore Signal.
-//	Si en algún caso queremos ignorar las señales hay que usar SIG_IGN 
-//	signal(SIGQUIT, SIG_IGN);

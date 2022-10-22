@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 18:25:36 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:58:42 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,49 +30,39 @@ static char	**ft_rm_var(char *var, char **env)
 	j = 0;
 	while (i < (len - 1))
 	{
-		if (ft_strnstr(env[j], var, ft_strlen(var)))
+		if (ft_strnstr(env[j], var, ft_strlen(var)) \
+			&& env[j][ft_strlen(var)] == '=')
 			j++;
 		new_env[i] = ft_strdup(env[j]);
 		i++;
 		j++;
 	}
-	new_env[i] = NULL;
+	new_env[i] = 0;
 	return (new_env);
 }
 
-void	ft_unset(char **cmd, char ***env)
+void	ft_unset(char *var, char ***env)
 {
 	char	**env2;
 	char	**aux;
 	int		coin;
 	int		i;
-	int		j;
 
 	env2 = *env;
 	i = 0;
 	coin = 0;
-	j = 0;
-	while (cmd[++j])
+	while (env2[i])
 	{
-		if (ft_check_var(cmd[j], cmd[0]))
-		{
-			printf("cmd = %s\n", cmd[j]);
-			while (env2[i])
-			{
-				if (cmd[j] && ft_strnstr(env2[i], cmd[j], ft_strlen(cmd[j])))
-					if (env2[i][ft_strlen(cmd[j])] == '=')
-						coin++;
-				i++;
-			}
-			printf("COIN = %d\n", coin);
-			if (coin != 0)
-			{
-				aux = ft_rm_var(cmd[j], env2);
-				free_d_array(env2);
-				*env = aux;
-				coin = 0;
-			}
-		}
+		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
+			if (env2[i][ft_strlen(var)] == '=')
+				coin++;
+		i++;
+	}
+	if (coin != 0)
+	{
+		aux = ft_rm_var(var, env2);
+		free_d_array(env2);
+		*env = aux;
 	}
 }
 
