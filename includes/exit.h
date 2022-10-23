@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_red.h                                       :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 09:29:29 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 09:30:06 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/21 13:40:33 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/21 13:41:23 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLE_RED_H
-# define DOUBLE_RED_H
+#ifndef EXIT_H
+# define EXIT_H
 
  
-char *double_redirection(char *key);
+int ft_exit(char *str);
 
 #endif

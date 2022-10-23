@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/22 15:55:15 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 08:14:00 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 
 int	ft_is_builtin(char **cmd)
 {
-	if (cmd[0])
+	if (cmd)
 	{
 		if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 || \
 			ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 || \

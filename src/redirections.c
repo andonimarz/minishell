@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/22 14:00:11 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:25:08 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	malloc_redirection(char **tokens, t_data **node)
 	while (tokens[x])
 	{
 		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
-			break ;
+			break;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 			len++;
 		x += 2;
 	}
-	if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
+	if (tokens[x] && tokens[x][0] == '|'&& tokens[x +1][0] == '0')
 		index = x;
 	if (len > 0)
 	{
@@ -57,7 +57,7 @@ int	fill_redirection(char **tokens, t_data *node)
 	while (tokens[x])
 	{	
 		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
-			break ;
+			break;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 		{

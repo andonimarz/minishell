@@ -1,7 +1,9 @@
 NAME				=	minishell
 
 libft				= 	libft
-INC_DIR				= 	./includes/
+INC_DIR				= 	./includes/ 
+						 
+							 
 CC 					= 	gcc
 CFLAGS 				= 	-Wall -Werror -Wextra -g3   -fsanitize=address
 SRC_DIR				=	src
@@ -22,19 +24,19 @@ SOURCES				=	 $(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/exec_utils.c \
 						$(SRC_DIR)/builtin1.c		\
 						$(SRC_DIR)/builtin2.c		\
-						$(SRC_DIR)/signals.c
+						$(SRC_DIR)/signals.c\
+						$(SRC_DIR)/exit.c\
 
 OBJS				= 	$(SOURCES:.c=.o)
 
 
 $(NAME): $(OBJS)
-#	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
+#	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 	make -C $(libft)
-#	$(CC) $(CFLAGS) $(OBJS) -lreadline $(libft)/libft.a -o $(NAME)
 	$(CC) $(CFLAGS) $(OBJS) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include $(libft)/libft.a -o $(NAME)
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)   
 
 all: $(NAME)
 
