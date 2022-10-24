@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 14:19:22 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:37:06 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	ft_export_job(char *var, char *value, char ***env)
 	env2 = *env;
 	i = -1;
 	coin = 0;
+	printf("var = %s\n", var);
+	printf("value = %s\n", value);
 	while (env2[++i])
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))

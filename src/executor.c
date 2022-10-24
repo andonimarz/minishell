@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 08:16:14 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:23:00 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 			ft_putstr_fd("minibash: ", 2);
 			ft_putstr_fd(node->cmd[0], 2);
 			ft_putendl_fd(" bash: command not found", 2);
+			ft_putendl_fd("ft_exit con frees etc", 2);
 		}
 	}
 	exit(0); //FT_EXIT WORK IN PROGRESS

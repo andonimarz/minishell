@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 09:24:22 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:27:33 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #include "signals.h"
 #include "exit.h"
 
-int global;
+int g_status;
 
 int	count_char_index(char *str, char a)
 {
@@ -124,16 +124,16 @@ char	*get_str(char **env)
 
 int	main(int argc, char *argv[], char **envp)
 {
-	char	*str;
-	char	**tokens;
-	char	**env2;
-	t_data	*data;
+	extern int	g_status;
+	char		*str;
+	char		**tokens;
+	char		**env2;
+	t_data		*data;
 
+	g_status = 0;
+	(void)argc;
+	(void)argv;
 	tokens = NULL;
-	if (!argc || !argv)
-		exit(0);
-	argc = 0;
-	argv = NULL;
 	env2 = env_copy(envp);
 	while (1)
 	{
@@ -144,14 +144,13 @@ int	main(int argc, char *argv[], char **envp)
 		if (str && *str != '\0')
 		{
 			add_history(str);
-			global = general_function(str, &data, env2);
-			if(!global)
-				ft_exec(data, &env2);
+			general_function(str, &data, env2);
+			ft_exec(data, &env2);
 			ft_lstclear1(&data);
 			if (tokens)
 				free_d_array(tokens);
 		}
-		else if(str)
+		else if (str)
 			free(str);
 	}
 	free_d_array(env2);
