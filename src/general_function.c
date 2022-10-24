@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/22 12:54:02 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:36:00 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_lstclear1(t_data **lst)
 	}
 }
 
-int check_redirection1(char **red)
+int	check_redirection1(char **red)
 {
 	int x;
 
@@ -77,9 +77,7 @@ int	general_function(char *str, t_data **data, char **env2)
 {
 	char	*aux;
 	char	**tokens;
-	int		x;
 
-	x = 0;
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
 	free(aux);
@@ -91,4 +89,3 @@ int	general_function(char *str, t_data **data, char **env2)
 	fill_cmd_path(*data, env2);
 	return(0);
 }
-
