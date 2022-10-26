@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 14:08:00 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:19:53 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,19 @@ int	ft_is_builtin(char **cmd)
 {
 	if (cmd)
 	{
-		if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 || \
-			ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 || \
-			ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
+		if ((ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 3) || \
+			(ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 4) || \
+			(ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 3))
 			return (1);
-		if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 || \
-			ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0 || \
-			ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
+		if ((ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 6) || \
+			(ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 5) || \
+			(ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0 && \
+			ft_strlen(cmd[0]) == 2))
 			return (2);
 	}
 	return (0);
