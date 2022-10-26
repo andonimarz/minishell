@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:25:08 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:32:58 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "redirections_utils.h"
 #include "utils.h"
 #include <stdlib.h>
+#include "general_function.h"
 
 int	malloc_redirection(char **tokens, t_data **node)
 {
@@ -91,11 +92,10 @@ t_data	*redirection(char **tokens)
 
 	i = -1;
 	x = 0;
-	check_pipe(tokens);
 	nodes = ft_lstnew2();
 	aux = nodes;
 	x = 0;
-	while (tokens[x])
+	while (tokens && tokens[x])
 	{
 		nodes = put_last_node(nodes);
 		i = fill_redirection(tokens + x, nodes);

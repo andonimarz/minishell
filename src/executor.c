@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/25 10:53:30 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 13:12:42 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,14 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 	if (node->cmd)
 	{
 		if (ft_is_builtin(node->cmd))
-			ft_call_builtin(node->cmd, &envp);
-		else if (execve(node->path, node->cmd, envp) == -1)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(node->cmd[0], 2);
-			ft_putendl_fd(" command not found", 2);
-			ft_putendl_fd("ft_exit con frees etc", 2);
-			ret = 127;
+			ft_call_builtin(node->cmd, &envp);
+			ret = 0;
 		}
+		else if (execve(node->path, node->cmd, envp) == -1)
+			ft_putendl_fd("Un comando malo ha llegado a ft_child", 2);
 	}
+	free(node->path);
 	exit(ret);
 }
 
@@ -120,6 +118,25 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd, int ret)
 	}
 }
 
+int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
+{
+	if (node->path || ft_is_builtin(node->cmd))
+		return (1);
+	*ret = 32512;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(node->cmd[0], 2);
+	ft_putendl_fd(" command not found", 2);
+	ft_close(&fd->fdin, 1);
+	ft_close(&fd->fdout, 1);
+	if (mode == 1)
+	{
+		close(0);
+		close(1);
+	}
+	ft_reset_fd(fd);
+	return (0);
+}
+
 void	ft_exec(t_data *node, char ***envp)
 {
 	int		node_nb;
@@ -146,11 +163,15 @@ void	ft_exec(t_data *node, char ***envp)
 		{
 			while (--node_nb)
 			{
-				ft_pipex(node, *envp, &fd, ret);
+				if (ft_check_cmd(node, &fd, &ret, 1))
+					ft_pipex(node, *envp, &fd, ret);
 				node = node->next;
 			}
-			ft_dups(node->redirection, &fd);
-			ft_child(node, *envp, &fd, ret);
+			if (ft_check_cmd(node, &fd, &ret, 0))
+			{
+				ft_dups(node->redirection, &fd);
+				ft_child(node, *envp, &fd, ret);
+			}
 		}
 		else
 		{

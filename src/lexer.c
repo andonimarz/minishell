@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 10:27:33 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:52:13 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,11 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
+	if (*str == 0)
+	{
+		free(aux);
+		return (NULL);
+	}
 	free(aux);
 	aux = ft_strtrim(str, " ");
 	free(str);
@@ -134,21 +139,26 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	tokens = NULL;
+	data = NULL;
 	env2 = env_copy(envp);
 	while (1)
 	{
 		ft_signals();
 		str = get_str(envp);
-		ft_check_rl(str, &data);
-		ft_exit(str);
-		if (str && *str != '\0')
+		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
 		{
-			add_history(str);
-			general_function(str, &data, env2);
-			ft_exec(data, &env2);
-			ft_lstclear1(&data);
-			if (tokens)
-				free_d_array(tokens);
+			ft_exit(str);
+			if (str && *str != '\0')
+			{
+				add_history(str);
+				g_status = general_function(str, &data, env2);
+				if (tokens)
+					free_d_array(tokens);
+				if (!g_status)
+					ft_exec(data, &env2);
+				if (data)
+					ft_lstclear1(&data);
+			}
 		}
 		else if (str)
 			free(str);

@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 09:28:05 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:46:43 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include "general_function.h"
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -59,13 +60,13 @@ void	ft_signals_in_cat(void)
 	signal(SIGQUIT, signal_handler_in_cat);
 }
 
-void	ft_check_rl(char *str, t_data **data)
+int	ft_check_rl(char *str, t_data **data)
 {
 	if (str == NULL)
 	{
-		printf("exit\n");
-		printf ("/////------>ft_exit <------\n");
-		(void) data;
-		exit(-1);
+		printf("\n");
+		ft_lstclear1(data);
+		return (-1);
 	}
+	return (0);
 }
