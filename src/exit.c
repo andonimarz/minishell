@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:48:52 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:46:54 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_exit(char *str)
 {
-	if (ft_strncmp(str, "exit", 4) == 0)
+	if (ft_strncmp(str, "exit", 4) == 0 && ft_strlen(str) == 4)
 	{
 		free(str);
 		exit(0);

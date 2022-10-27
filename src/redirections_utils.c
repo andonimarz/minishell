@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 09:48:38 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:49:21 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,15 @@ int	check_pipe(char **tokens)
 	x = 0;
 	while (tokens && tokens[x])
 		x++;
- 
 	if (x > 0 && (tokens[0][0] == '|' ))
 	{
-		printf("syntax error near unexpected token `%s'\n",(tokens[0]));
-		return(1);
+		printf("3syntax error near unexpected token `%s'\n", (tokens[0]));
+		return (1);
 	}
-	else if(x > 0 && tokens[x - 2][0] == '|' )
+	else if (x > 0 && tokens[x - 2][0] == '|' )
 	{
-		printf("syntax error near unexpected token `%s'\n",(tokens[x-2]));
-		return(1);
-		
+		printf("4syntax error near unexpected token `%s'\n", (tokens[x - 2]));
+		return (2);
 	}
-	return(0);
+	return (0);
 }

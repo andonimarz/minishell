@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:52:13 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:10:10 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include "signals.h"
 #include "exit.h"
+#include "status.h"
 
 int g_status;
 
@@ -148,14 +149,14 @@ int	main(int argc, char *argv[], char **envp)
 		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
 		{
 			ft_exit(str);
-			if (str && *str != '\0')
+			if (str && *str != '\0' && ft_status(str))
 			{
 				add_history(str);
 				g_status = general_function(str, &data, env2);
 				if (tokens)
 					free_d_array(tokens);
 				if (!g_status)
-					ft_exec(data, &env2);
+					g_status = ft_exec(data, &env2);
 				if (data)
 					ft_lstclear1(&data);
 			}
