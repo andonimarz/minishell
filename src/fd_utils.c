@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/26 12:44:49 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:15:10 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 	else if (mode == 3)
 	{
 		if (!file)
+		{
 			ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
+			ft_putstr_fd("poner la global a 2 en fd_utils 44'\n", 2);
+		}
 		else
 			here_doc(file, fd);
 	}

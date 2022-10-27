@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/26 13:12:42 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:32:09 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 	if (mode == 1)
 	{
 		close(0);
-		close(1);
 	}
 	ft_reset_fd(fd);
 	return (0);
@@ -171,6 +170,11 @@ void	ft_exec(t_data *node, char ***envp)
 			{
 				ft_dups(node->redirection, &fd);
 				ft_child(node, *envp, &fd, ret);
+			}
+			else
+			{
+				printf("ft_exit de unico o ultimo cmd\n");
+				exit(127);
 			}
 		}
 		else
