@@ -21,6 +21,7 @@ SOURCES				=	 $(SRC_DIR)/lexer.c				\
 						$(SRC_DIR)/general_function.c	\
 						$(SRC_DIR)/fd_utils.c			\
 						$(SRC_DIR)/executor.c			\
+						$(SRC_DIR)/executor2.c			\
 						$(SRC_DIR)/exec_utils.c			\
 						$(SRC_DIR)/builtin1.c			\
 						$(SRC_DIR)/builtin2.c			\
