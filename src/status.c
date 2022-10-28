@@ -1,4 +1,6 @@
 #include "../libft/libft.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
 extern int	g_status;
 
@@ -13,6 +15,7 @@ int	ft_status(char *str)
 	if (ft_strncmp(str, "$?", 2) == 0 && ft_strlen(str) == 2)
 	{
 		printf("%d: command not found\n", g_status);
+		add_history(str);
 		free(str);
 		return (0);
 	}

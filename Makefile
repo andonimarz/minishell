@@ -24,6 +24,7 @@ SOURCES				=	 $(SRC_DIR)/lexer.c				\
 						$(SRC_DIR)/exec_utils.c			\
 						$(SRC_DIR)/builtin1.c			\
 						$(SRC_DIR)/builtin2.c			\
+						$(SRC_DIR)/builtin3.c			\
 						$(SRC_DIR)/signals.c			\
 						$(SRC_DIR)/exit.c				\
 						$(SRC_DIR)/status.c
