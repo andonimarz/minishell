@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 12:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:33:47 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:59:06 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	minishell_job(char *str, t_data *data, char **env2, char **tokens)
 		if (tokens)
 			free_d_array(tokens);
 		if (!g_status)
-			g_status = ft_exec(data, &env2);
+			ft_exec(data, &env2);
 		if (data)
 			ft_lstclear1(&data);
 	}

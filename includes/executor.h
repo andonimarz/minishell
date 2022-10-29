@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:18:45 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/29 12:44:10 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:58:19 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //Creates a t_fd structure and calls ft_pipex for every command
 // except for the last or if there is only one.
 //Closes all used fd and restores original STDIN and STDOUT
-int		ft_exec(t_data *node, char ***envp);
+void	ft_exec(t_data *node, char ***envp);
 
 //executor2.c
 
