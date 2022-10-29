@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/29 11:00:36 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:36:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ void	signal_handler_in_cat(int num)
 	if (num == SIGINT)
 	{
 		printf("\n");
-		printf ("ft_exit con frees etc\n");
 		exit (0);
 	}
 	if (num == SIGQUIT)
 	{
 		printf("^\\Quit: 3\n");
-		printf ("ft_exit con frees etc\n");
 		exit (0);
 	}
 }

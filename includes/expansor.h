@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 10:43:26 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/29 10:43:35 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/29 11:19:15 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 12:44:41 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSOR2_H
-# define EXPANSOR2_H
+#ifndef EXPANSOR_H
+# define EXPANSOR_H
 
-char *expansor(char *str);
+char	*expansor(char *str);
 
 #endif

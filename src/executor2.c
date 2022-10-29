@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 10:45:33 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/29 11:12:04 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/29 11:40:18 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 12:29:36 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 			ret = 0;
 		}
 		else if (execve(node->path, node->cmd, envp) == -1)
-			ft_putendl_fd("Un comando malo ha llegado a ft_child", 2);
+			ft_putendl_fd("bash: command not found", 2);
 	}
 	free(node->path);
 	exit(ret);

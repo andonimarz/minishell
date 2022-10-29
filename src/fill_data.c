@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 10:25:14 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 10:55:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	malloc_commands(char **tokens, t_data **node)
 	x = 0;
 	while (tokens[x])
 	{
-		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
-			break;
+		if (tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 2]
 			&& tokens[x + 1][0] == '0')
 			x += 4;
@@ -44,46 +44,50 @@ void	malloc_commands(char **tokens, t_data **node)
 			x += 2;
 		}
 	}
-	if(len > 0)
+	if (len > 0)
 	{
 		aux->cmd = (char **)ft_calloc((len + 1), sizeof(char *));
 		aux->cmd[len] = 0;
 	}
 }
 
+int	sum_redirection(char **tokens, int index)
+{
+	if ((tokens[index][0] == '<' || tokens[index][0] == '>') && tokens[index
+		+ 1][0] == '0' && tokens[index + 2])
+		return (4);
+	else if ((tokens[index][0] == '<' || tokens[index][0] == '>')
+			&& tokens[index + 1][0] == '0' && !tokens[index + 2])
+		return (2);
+	return (0);
+}
+
 int	fill_commands(char **tokens, t_data *node)
 {
-	int		x;
-	t_data	*aux;
-	int		i;
+	int	x;
+	int	i;
+	int	s;
 
+	s = 0;
 	i = 0;
 	x = 0;
-	aux = node;
 	malloc_commands(tokens, &node);
-	while (tokens[x] )
+	while (tokens[x])
 	{
-		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
-			break;
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
-			+ 1][0] == '0')
+		if (tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
+		s = sum_redirection(tokens, x);
+		x += s;
+		if (tokens[x] && s == 0)
 		{
-			if (tokens[x + 2])
-				x += 4;
-			else
-				x += 2;
-		}
-		else if (tokens[x])
-		{
-			aux->cmd[i] = ft_strdup(tokens[x]);;
+			node->cmd[i] = ft_strdup(tokens[x]);
 			i++;
 			x += 2;
 		}
 	}
-	if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
+	if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
 		return (x);
-	else
-		return (0);
+	return (0);
 }
 
 t_data	*commands(char **tokens, t_data *aux)

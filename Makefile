@@ -5,11 +5,14 @@ INC_DIR				= 	./includes/
 						 
 							 
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS 				= 	-Wall -Werror -Wextra -g3#   -fsanitize=address
 SRC_DIR				=	src
-SOURCES				=	 $(SRC_DIR)/lexer.c				\
+SOURCES				=	$(SRC_DIR)/main.c				\
+						$(SRC_DIR)/lexer.c				\
 						$(SRC_DIR)/fill_tokens.c		\
+						$(SRC_DIR)/fill_tokens_utils.c		\
 						$(SRC_DIR)/expansor.c			\
+						$(SRC_DIR)/expansor_utils.c			\
 						$(SRC_DIR)/utils.c				\
 						$(SRC_DIR)/utils2.c				\
 						$(SRC_DIR)/environment.c		\

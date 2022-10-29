@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:16:26 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:44:02 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:45:07 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "utils.h"
 
-//t_data	*redirection(char **tokens);
 t_data	*commands(char **tokens, t_data *aux);
 
 #endif

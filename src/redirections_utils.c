@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/27 12:49:21 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:08:09 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirections.h" 
 #include "../libft/libft.h"
-#include <stdlib.h>
+#include "redirections.h"
 #include "utils.h"
+#include <stdlib.h>
 
 t_data	*ft_lstnew2(void)
 {
@@ -73,14 +73,18 @@ int	check_pipe(char **tokens)
 	x = 0;
 	while (tokens && tokens[x])
 		x++;
-	if (x > 0 && (tokens[0][0] == '|' ))
+	if (x > 0 && (tokens[0][0] == '|'))
 	{
-		printf("3syntax error near unexpected token `%s'\n", (tokens[0]));
+		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
+		ft_putstr_fd(tokens[0], 2);
+		ft_putendl_fd("\'", 2);
 		return (1);
 	}
-	else if (x > 0 && tokens[x - 2][0] == '|' )
+	else if (x > 0 && tokens[x - 2][0] == '|')
 	{
-		printf("4syntax error near unexpected token `%s'\n", (tokens[x - 2]));
+		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
+		ft_putstr_fd(tokens[x - 2], 2);
+		ft_putendl_fd("\'", 2);
 		return (2);
 	}
 	return (0);
