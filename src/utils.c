@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:21:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:23:04 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*check_str(char *f, char *str, char *cmd, char ***p)
 		free_d_array(*p);
 		return (str);
 	}
+	free(f);
 	return (NULL);
 }
 
@@ -97,11 +98,3 @@ char	*check_if_command(char **envp, char *str)
 	free_d_array(path_list);
 	return (0);
 }
-
-/* int	file_exists(char *str)
-{
-	char	*file;
-
-	file = ft_strjoin("./", str);
-	return (access(file, F_OK));
-} */
