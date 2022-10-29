@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/27 12:10:10 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:18:27 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,13 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
+	if (!str)
+	{
+		if (aux)
+			free(aux);
+		printf("exit\n");
+		exit(0);
+	}
 	if (*str == 0)
 	{
 		free(aux);
@@ -128,7 +135,7 @@ char	*get_str(char **env)
 	return (aux);
 }
 
-int	main(int argc, char *argv[], char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	extern int	g_status;
 	char		*str;
@@ -146,7 +153,7 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		ft_signals();
 		str = get_str(envp);
-		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
+		if (str && *str != '\0')
 		{
 			ft_exit(str);
 			if (str && *str != '\0' && ft_status(str))
@@ -156,14 +163,15 @@ int	main(int argc, char *argv[], char **envp)
 				if (tokens)
 					free_d_array(tokens);
 				if (!g_status)
-					g_status = ft_exec(data, &env2);
-				if (data)
-					ft_lstclear1(&data);
+					ft_exec(data, &env2);
 			}
+			if (data)
+				ft_lstclear1(&data);
+			else if (str)
+				free(str);
 		}
-		else if (str)
-			free(str);
 	}
-	free_d_array(env2);
+	if (env2)
+		free_d_array(env2);
 	return (0);
 }

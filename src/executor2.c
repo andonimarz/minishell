@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/29 10:45:33 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/29 11:12:04 by amarzana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "double_red.h"
 #include "fd_utils.h"
@@ -104,6 +116,9 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 {
 	if (node->path || ft_is_builtin(node->cmd))
 		return (1);
+	if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0 && \
+		ft_strlen(node->cmd[0]) == 4)
+		return (0);
 	*ret = 32512;
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(node->cmd[0], 2);
@@ -111,9 +126,7 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 	ft_close(&fd->fdin, 1);
 	ft_close(&fd->fdout, 1);
 	if (mode == 1)
-	{
 		close(STDIN_FILENO);
-	}
 	ft_reset_fd(fd);
 	return (0);
 }

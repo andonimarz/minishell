@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/28 11:03:48 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:00:36 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,4 @@ void	ft_signals_in_cat(void)
 {
 	signal(SIGINT, signal_handler_in_cat);
 	signal(SIGQUIT, signal_handler_in_cat);
-}
-
-int	ft_check_rl(char *str, t_data **data)
-{
-	if (str == NULL)
-	{
-		printf("\n");
-		ft_lstclear1(data);
-		return (-1);
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/26 13:05:12 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:24:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../libft/libft.h"
 #include "utils.h"
 #include "builtins.h"
+
+extern int	g_status;
 
 char	*ft_subst_var(char *var)
 {
@@ -50,6 +52,7 @@ int	ft_check_var(char *var, char *cmd)
 				ft_putstr_fd(": `", 2);
 				ft_putstr_fd(var, 2);
 				ft_putendl_fd("': not a valid identifier", 2);
+				g_status = 1;
 				return (0);
 			}
 		}

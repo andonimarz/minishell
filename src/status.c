@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   status.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/29 10:43:11 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/29 11:20:54 by amarzana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -16,7 +28,6 @@ int	ft_status(char *str)
 	{
 		printf("%d: command not found\n", g_status);
 		add_history(str);
-		free(str);
 		return (0);
 	}
 	return (1);
