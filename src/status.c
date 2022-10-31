@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 11:38:17 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:42:57 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/30 12:52:01 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/31 11:14:48 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_status(char *str)
 	{
 		printf("%d: command not found\n", g_status);
 		add_history(str);
+		g_status = 127;
 		return (0);
 	}
 	return (1);

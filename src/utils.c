@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 13:23:04 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:02:46 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*check_if_command(char **envp, char *str)
 		return (0);
 	cmd = ft_strjoin("/", str);
 	path_list = ft_split(find_path(envp), ':');
-	while (path_list[x])
+	while (path_list && path_list[x])
 	{
 		full_cmd_path = ft_strjoin(path_list[x], cmd);
 		full_cmd_path = check_str(full_cmd_path, str, cmd, &path_list);
@@ -95,6 +95,7 @@ char	*check_if_command(char **envp, char *str)
 		x++;
 	}
 	free(cmd);
-	free_d_array(path_list);
+	if (path_list)
+		free_d_array(path_list);
 	return (0);
 }

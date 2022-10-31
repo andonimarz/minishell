@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 15:04:43 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:14:40 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 extern int	g_status;
 
-int	ft_get_exit_nb(char *str, int mode)
+int	ft_get_exit_nb(char *str, char *full_str)
 {
 	int	i;
 	int	sign;
@@ -27,20 +27,21 @@ int	ft_get_exit_nb(char *str, int mode)
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')
 			sign = -sign;
-	if (mode == 0)
-		while (str[i] && str[i] != ')')
-			num = num * 10 + (str[i++] - 48);
-	else if (mode == 1)
-		while (str[i])
-			num = num * 10 + (str[i++] - 48);
+	while (str[i])
+		num = num * 10 + (str[i++] - 48);
+	free(full_str);
 	return (num * sign);
 }
 
 static void	ft_exit_error(char *str, int len)
 {
+	ft_putendl_fd("exit\n", 2);
 	ft_putstr_fd("minishell: exit: ", 2);
-	while (len--)
-		write(1, str++, 2);
+	while (len)
+	{
+		write(2, str++, 1);
+		len--;
+	}
 	ft_putendl_fd(": numeric argument required", 2);
 	exit(0);
 }
@@ -65,22 +66,15 @@ int	ft_exit(char *str)
 	if (ft_strncmp(str, "exit", 4) == 0 && ft_strlen(str) == 4)
 	{
 		free(str);
+		printf("exit\n");
 		exit(0);
-	}
-	else if (ft_strncmp(str, "exit(", 5) == 0 && str[ft_strlen(str) - 1] == ')')
-	{
-		if (ft_isnum(&str[5], (ft_strlen(str) - 6)))
-		{
-			free(str);
-			exit(ft_get_exit_nb(&str[5], 0));
-		}
 	}
 	else if (ft_strncmp(str, "exit ", 5) == 0)
 	{
 		if (ft_isnum(&str[5], (ft_strlen(str) - 5)))
 		{
-			free(str);
-			exit(ft_get_exit_nb(&str[5], 1));
+			printf("exit\n");
+			exit(ft_get_exit_nb(&str[5], str));
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/30 08:58:22 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:56:47 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "double_red.h"
 #include "environment.h"
 #include "executor.h"
-#include "exit.h"
 #include "expansor.h"
 #include "fd_utils.h"
 #include "fill_data.h"
@@ -22,8 +21,6 @@
 #include "general_function.h"
 #include "get_cmd_path.h"
 #include "redirections.h"
-#include "signals.h"
-#include "status.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -31,8 +28,11 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "signals.h"
+#include "exit.h"
+#include "status.h"
 
-int		g_status;
+int g_status;
 
 int	count_char_index(char *str, char a)
 {

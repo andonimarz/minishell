@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:24:41 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:38:45 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*double_redirection(char *key)
 		{
 			ft_putstr_fd("bash: warning: here-document delimited by\
 			 end-of-file (wanted `end')\n", 2);
+			ft_putstr_fd("ft_exit pero la global vale 0\n", 2);
 			break ;
 		}
 		if (!ft_strncmp(str, key, __INT_MAX__))
@@ -72,7 +73,7 @@ void	here_doc(char *key, t_fd *fd)
 		close(fd1[0]);
 		str = double_redirection(key);
 		if (str)
-			ft_putendl_fd(str, 1);
+			ft_putendl_fd(str, fd1[1]);
 		close(fd1[1]);
 		exit(0);
 	}

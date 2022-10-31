@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:40:33 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:44:21 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:40:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXIT_H
 # define EXIT_H
 
-int		ft_exit(char *str);
-char	*ft_getenv2(char *s);
+ 
+int ft_exit(char *str);
+char  *ft_getenv2(char *s);
 
 #endif
