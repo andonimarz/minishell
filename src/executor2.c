@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 12:07:30 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/30 12:08:30 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:55:17 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,20 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 {
 	if (node->path || ft_is_builtin(node->cmd))
 		return (1);
-	if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0 && \
-		ft_strlen(node->cmd[0]) == 4)
-		return (0);
-	*ret = 32512;
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(node->cmd[0], 2);
-	ft_putendl_fd(" command not found", 2);
-	ft_close(&fd->fdin, 1);
-	ft_close(&fd->fdout, 1);
-	if (mode == 1)
-		close(STDIN_FILENO);
-	ft_reset_fd(fd);
+	if (node->cmd)
+	{
+		if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0 && \
+			ft_strlen(node->cmd[0]) == 4)
+			return (0);
+		*ret = 32512;
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(node->cmd[0], 2);
+		ft_putendl_fd(" command not found", 2);
+		ft_close(&fd->fdin, 1);
+		ft_close(&fd->fdout, 1);
+		if (mode == 1)
+			close(STDIN_FILENO);
+		ft_reset_fd(fd);
+	}
 	return (0);
 }
