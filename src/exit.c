@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/31 09:14:40 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:00:17 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ static void	ft_exit_error(char *str, int len)
 int	ft_isnum(char *str, int len)
 {
 	int	i;
-	int	isnum;
 
 	i = 0;
-	isnum = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (str[i] && i < len)
