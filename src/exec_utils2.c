@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 12:27:49 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:18:23 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ char	*ft_subst_var(char *var)
 	return (0);
 }
 
+static void	ft_check_var2(char *var, char *cmd)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": `", 2);
+	ft_putstr_fd(var, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
+	g_status = 1;
+}
+
+
 int	ft_check_var(char *var, char *cmd)
 {
 	int	len;
@@ -42,19 +53,19 @@ int	ft_check_var(char *var, char *cmd)
 
 	len = ft_strlen(var);
 	i = 0;
+	if (len == 1 && !ft_isalpha(var[0]))
+	{
+		ft_check_var2(var, cmd);
+		return (0);
+	}
 	while (var[i] && i < len)
 	{
-		if (!ft_isalnum(var[i]))
+		if ((!ft_isalpha(var[i]) && i == 0) || !ft_isalnum(var[i]))
 		{
 			if (!(ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0 \
 			&& var[i] == '=' && !var[i + 1]))
 			{
-				ft_putstr_fd("minishell: ", 2);
-				ft_putstr_fd(cmd, 2);
-				ft_putstr_fd(": `", 2);
-				ft_putstr_fd(var, 2);
-				ft_putendl_fd("': not a valid identifier", 2);
-				g_status = 1;
+				ft_check_var2(var, cmd);
 				return (0);
 			}
 		}

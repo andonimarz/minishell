@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 10:50:17 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:33:12 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	ft_echo_job(char **cmd, char **env, int i)
 			write(1, " ", 1);
 	}
 }
+
 void	ft_echo(char **cmd, char **env)
 {
 	int		flag;

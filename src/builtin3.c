@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 11:57:01 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 11:13:42 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:36:23 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,47 @@ void	ft_unset(char *var, char ***env)
 	}
 }
 
+void	ft_chdir_prev(char *dir, char ***env)
+{
+	char	*old_pwd;
+	char	*pwd;
+
+	old_pwd = NULL;
+	dir = ft_getenv(*env, "OLDPWD=");
+	old_pwd = ft_strdup(dir);
+	pwd = getcwd(NULL, 0);
+	ft_export_job("OLDPWD=", pwd, env);
+	free (pwd);
+	chdir(old_pwd);
+	free (old_pwd);
+	pwd = getcwd(NULL, 0);
+	ft_export_job("PWD=", pwd, env);
+	free (pwd);
+}
+
 void	ft_chdir(char *dir, char ***env)
 {
 	char	*pwd;
 
 	if ((ft_strlen(dir) == 1 && ft_strncmp(dir, "~", 1) == 0) || !dir)
 		dir = ft_getenv(*env, "HOME");
-	if (access(dir, F_OK) == -1)
+	if ((ft_strlen(dir) == 1 && ft_strncmp(dir, "-", 1) == 0))
+		ft_chdir_prev(dir, env);
+	else
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(dir, 2);
-		ft_putendl_fd(": No such file or directory", 2);
-		g_status = 1;
+		if (access(dir, F_OK) == -1)
+		{
+			ft_putstr_fd("minishell: cd: ", 2);
+			ft_putstr_fd(dir, 2);
+			ft_putendl_fd(": No such file or directory", 2);
+			g_status = 1;
+		}
+		pwd = getcwd(NULL, 0);
+		ft_export_job("OLDPWD=", pwd, env);
+		free (pwd);
+		chdir(dir);
+		pwd = getcwd(NULL, 0);
+		ft_export_job("PWD=", pwd, env);
+		free (pwd);
 	}
-	pwd = getcwd(NULL, 0);
-	ft_export_job("OLDPWD=", pwd, env);
-	free (pwd);
-	chdir(dir);
-	pwd = getcwd(NULL, 0);
-	ft_export_job("PWD=", pwd, env);
-	free (pwd);
 }
