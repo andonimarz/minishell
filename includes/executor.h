@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:18:45 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 12:25:49 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 10:27:03 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "utils.h"
 # include "fd_utils.h"
+# include <stdio.h>
 
 //executor.c
 
@@ -50,16 +51,17 @@ void	ft_call_builtin(char **cmd, char ***envp);
 //and		2 if cmd is "export", "unset" or "chdir"
 int		ft_is_builtin(char **cmd);
 
+//Compares the given cmd with builtins and returns 0 if there is a coincidence
+int		ft_builtncmp(const char *s1, const char *s2, size_t n);
+
 //exec_utils2.c
 //Checks if the given variable is full alphanumeric
 int		ft_check_var(char *var, char *cmd);
-
 
 //Returns the number of nodes of a linked list
 int		ft_count_nodes(t_data *node);
 
 //Returns the variable without = and the value
 char	*ft_subst_var(char *var);
-
 
 #endif
