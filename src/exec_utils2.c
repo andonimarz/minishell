@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/04 16:18:23 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 09:47:38 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	ft_check_var2(char *var, char *cmd)
 	ft_putendl_fd("': not a valid identifier", 2);
 	g_status = 1;
 }
-
 
 int	ft_check_var(char *var, char *cmd)
 {

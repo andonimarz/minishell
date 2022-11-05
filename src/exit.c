@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/02 17:00:17 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 09:51:58 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,25 @@ static void	ft_exit_error(char *str, int len)
 	exit(0);
 }
 
-int	ft_isnum(char *str, int len)
+int	ft_isok(char *str, int len, int mode)
 {
 	int	i;
 
 	i = 0;
-	if (str[0] == '-' || str[0] == '+')
-		i++;
-	while (str[i] && i < len)
-		if (!ft_isdigit(str[i++]))
-			ft_exit_error(str, len);
+	if (mode == 0)
+	{
+		if (str[0] == '-' || str[0] == '+')
+			i++;
+		while (str[i] && i < len)
+			if (!ft_isdigit(str[i++]))
+				ft_exit_error(str, len);
+	}
+	else if (mode == 1)
+	{
+		while (str[i] && i < len)
+			if (str[i++] == '|')
+				return (0);
+	}
 	return (1);
 }
 
@@ -67,9 +76,10 @@ int	ft_exit(char *str)
 		printf("exit\n");
 		exit(0);
 	}
-	else if (ft_strncmp(str, "exit ", 5) == 0)
+	else if (ft_strncmp(str, "exit ", 5) == 0 && \
+	ft_isok(&str[5], (ft_strlen(str) - 5), 1))
 	{
-		if (ft_isnum(&str[5], (ft_strlen(str) - 5)))
+		if (ft_isok(&str[5], (ft_strlen(str) - 5), 0))
 		{
 			printf("exit\n");
 			exit(ft_get_exit_nb(&str[5], str));
@@ -78,7 +88,7 @@ int	ft_exit(char *str)
 	return (0);
 }
 
-char	*ft_getenv2(char *s)
+/* char	*ft_getenv2(char *s)
 {
 	if (getenv(s))
 		return (getenv(s));
@@ -86,4 +96,4 @@ char	*ft_getenv2(char *s)
 		return (ft_itoa(g_status));
 	else
 		return (NULL);
-}
+} */

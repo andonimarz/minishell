@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expansor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:18:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/30 12:25:02 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/03 09:34:52 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	check_next_char(char c)
 {
 	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a'
-			&& c <= 'z') || c == '_')
+			&& c <= 'z') || c == '_' || c == '?')
 		return (0);
 	return (1);
 }

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/30 12:49:02 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:03:04 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/readline.h>
+#include "general_function.h"
 #include <readline/history.h>
+#include <readline/readline.h>
 #include <signal.h>
 #include <signals.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include "general_function.h"
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -41,15 +41,9 @@ void	ft_signals(void)
 void	signal_handler_in_cat(int num)
 {
 	if (num == SIGINT)
-	{
-		printf("\n");
-		exit (0);
-	}
+		write(2, "\n", 1);
 	if (num == SIGQUIT)
-	{
-		printf("^\\Quit: 3\n");
-		exit (0);
-	}
+		write(2, "^\\Quit: 3\n", 10);
 }
 
 void	ft_signals_in_cat(void)

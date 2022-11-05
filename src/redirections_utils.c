@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/30 12:58:48 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:00:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	check_pipe(char **tokens)
 		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
 		ft_putstr_fd(tokens[0], 2);
 		ft_putendl_fd("\'", 2);
+		free_d_array(tokens);
 		return (1);
 	}
 	else if (x > 0 && tokens[x - 2][0] == '|' && tokens[x - 1][0] == '0')
@@ -85,6 +86,7 @@ int	check_pipe(char **tokens)
 		ft_putstr_fd("bash: syntax error near unexpected token `", 2);
 		ft_putstr_fd(tokens[x - 2], 2);
 		ft_putendl_fd("\'", 2);
+		free_d_array(tokens);
 		return (2);
 	}
 	return (0);

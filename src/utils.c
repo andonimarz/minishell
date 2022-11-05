@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/31 12:02:46 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:02:01 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ char	*find_path(char **envp)
 
 char	*check_str(char *f, char *str, char *cmd, char ***p)
 {
-	if (access(f, F_OK) == 0)
-	{
-		free(cmd);
-		free_d_array(*p);
-		return (f);
-	}
-	else if (access(str, F_OK) == 0)
+	if (access(str, F_OK) == 0)
 	{
 		free(cmd);
 		free(f);
 		free_d_array(*p);
-		return (str);
+		return (ft_strdup(str));
+	}
+	else if (access(f, F_OK) == 0)
+	{
+		free(cmd);
+		free_d_array(*p);
+		return (f);
 	}
 	free(f);
 	return (NULL);
@@ -83,6 +83,8 @@ char	*check_if_command(char **envp, char *str)
 	x = 0;
 	if (!str)
 		return (0);
+	if (!access(str, F_OK))
+		return (ft_strdup(str));
 	cmd = ft_strjoin("/", str);
 	path_list = ft_split(find_path(envp), ':');
 	while (path_list && path_list[x])
