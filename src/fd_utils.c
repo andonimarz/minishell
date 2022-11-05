@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/04 08:03:38 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 13:45:19 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 extern int	g_status;
 
-void	ft_get_fd(char *file, int mode, t_fd *fd)
+void	ft_get_fd(char *file, int mode, t_fd *fd, t_data *node)
 {
 	if (mode == 0)
 	{
@@ -39,7 +39,11 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		fd->fdout = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
 	else if (mode == 3)
-		here_doc(file, fd);
+	{
+		if (fd->fdin != -2 && fd->fdin != node->here_doc)
+			ft_close(&fd->fdin, 0);
+		fd->fdin = node->here_doc;
+	}
 }
 
 void	ft_close(int *fd, int mode)

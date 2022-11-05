@@ -5,7 +5,7 @@ INC_DIR				= 	./includes/
 						 
 							 
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g3   #-fsanitize=address
+CFLAGS 				= 	-Wall -Werror -Wextra -g3 # -fsanitize=address
 SRC_DIR				=	src
 SOURCES				=	$(SRC_DIR)/main.c				\
 						$(SRC_DIR)/lexer.c				\
@@ -26,7 +26,7 @@ SOURCES				=	$(SRC_DIR)/main.c				\
 						$(SRC_DIR)/executor.c			\
 						$(SRC_DIR)/executor2.c			\
 						$(SRC_DIR)/exec_utils.c			\
-						$(SRC_DIR)/exec_utils2.c			\
+						$(SRC_DIR)/exec_utils2.c		\
 						$(SRC_DIR)/builtin1.c			\
 						$(SRC_DIR)/builtin2.c			\
 						$(SRC_DIR)/builtin3.c			\

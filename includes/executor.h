@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:18:45 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/05 10:27:03 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 12:16:53 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_pipex(t_data *node, char **envp, t_fd *fd, int ret);
 void	ft_child(t_data *node, char **envp, t_fd *fd, int ret);
 
 //Calls ft_get_fd for every redirection
-void	ft_dups(char **redir, t_fd *fd);
+void	ft_dups(char **redir, t_fd *fd, t_data *node);
 
 //Makes required redirections before executing the command
 int		ft_dup_work(t_fd *fd, int mode);

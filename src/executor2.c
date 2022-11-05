@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 12:07:30 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/04 08:25:28 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 12:24:19 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_dup_work(t_fd *fd, int mode)
 	return (1);
 }
 
-void	ft_dups(char **redir, t_fd *fd)
+void	ft_dups(char **redir, t_fd *fd, t_data *node)
 {
 	int	i;
 
@@ -56,13 +56,13 @@ void	ft_dups(char **redir, t_fd *fd)
 		while (redir[i])
 		{
 			if (ft_strncmp(redir[i], "<", ft_strlen(redir[i])) == 0)
-				ft_get_fd(redir[i + 1], 0, fd);
+				ft_get_fd(redir[i + 1], 0, fd, node);
 			else if (ft_strncmp(redir[i], ">", ft_strlen(redir[i])) == 0)
-				ft_get_fd(redir[i + 1], 1, fd);
+				ft_get_fd(redir[i + 1], 1, fd, node);
 			else if (ft_strncmp(redir[i], ">>", ft_strlen(redir[i])) == 0)
-				ft_get_fd(redir[i + 1], 2, fd);
+				ft_get_fd(redir[i + 1], 2, fd, node);
 			else if (ft_strncmp(redir[i], "<<", ft_strlen(redir[i])) == 0)
-				ft_get_fd(redir[i + 1], 3, fd);
+				ft_get_fd(redir[i + 1], 3, fd, node);
 			i++;
 		}
 	}
@@ -91,7 +91,7 @@ void	ft_pipex(t_data *node, char **envp, t_fd *fd, int ret)
 {
 	pid_t	pid;
 
-	ft_dups(node->redirection, fd);
+	ft_dups(node->redirection, fd, node);
 	pipe(fd->pipe);
 	pid = fork();
 	if (pid < 0)
@@ -130,7 +130,7 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 		ft_close(&fd->fdin, 1);
 		ft_close(&fd->fdout, 1);
 	}
-	ft_dups(node->redirection, fd);
+	ft_dups(node->redirection, fd, node);
 	if (mode == 1)
 		close(STDIN_FILENO);
 	ft_reset_fd(fd);
