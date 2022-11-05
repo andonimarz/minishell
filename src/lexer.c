@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/05 13:26:37 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:08:59 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	count_index2(char *str)
 {
 	if (!second_char_exists(str, *str))
 	{
-		printf("error\n");
-		exit(0);
+		return (-1);
 	}
 	return (count_char_index(str, *str));
 }
@@ -72,6 +71,8 @@ int	count_word_index(char *str)
 		if ((*str == '"' || *str == '\''))
 		{
 			i = count_index2(str);
+			if (i == -1)
+				return (-1);
 			x += i + 1;
 			str += i + 1;
 		}
