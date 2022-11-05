@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/04 11:19:16 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 10:46:47 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,12 @@ static int	ft_count_flags(char **cmd)
 			flag++;
 			i = 0;
 			while (cmd[j][++i])
-			{
 				if (cmd[j][i] != 'n')
-				{
-					flag--;
-					return (flag);
-				}
-			}
+					return (--flag);
+			j++;
 		}
-		j++;
+		else
+			break ;
 	}
 	return (flag);
 }
