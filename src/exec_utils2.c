@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/05 10:20:47 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:44:23 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	ft_check_var(char *var, char *cmd)
 	}
 	while (var[i] && i < len)
 	{
-		if ((!ft_isalpha(var[i]) && i == 0) || !ft_isalnum(var[i]))
+		if (var[i] != '_' && ((!ft_isalpha(var[i]) && i == 0) || \
+		!ft_isalnum(var[i])))
 		{
 			if (!(ft_builtncmp(cmd, "export", ft_strlen(cmd)) == 0 \
 			&& var[i] == '=' && !var[i + 1]))
